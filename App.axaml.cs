@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using System.Linq;
+using ToDoBasicList.Services;
 using ToDoBasicList.ViewModels;
 using ToDoBasicList.Views;
 
@@ -20,10 +21,17 @@ namespace ToDoBasicList
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
+                var viewModel = new MainViewModel();
+
+                var mainWindow = new MainWindow
                 {
-                    DataContext = new MainViewModel(),
+                    DataContext = viewModel
                 };
+
+                var trayService = new TrayIconService();
+                trayService.Initialize(viewModel, mainWindow);
+
+                desktop.MainWindow = mainWindow;
             }
 
             base.OnFrameworkInitializationCompleted();

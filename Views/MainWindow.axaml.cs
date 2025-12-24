@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using System;
 
 namespace ToDoBasicList.Views
@@ -11,6 +12,16 @@ namespace ToDoBasicList.Views
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.Manual;
             Opened += OnWindowOpened;
+
+            PointerPressed += OnPointerPressed;
+        }
+
+        private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+            {
+                BeginMoveDrag(e);
+            }
         }
 
         private void OnWindowOpened(object? sender, EventArgs e)

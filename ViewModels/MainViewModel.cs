@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace ToDoBasicList.ViewModels
 {
@@ -14,7 +16,25 @@ namespace ToDoBasicList.ViewModels
                 execute: AddTask,
                 canExecute: CanAddTask
                 );
+
+            PinWindowCommand = new RelayCommand(Pin);
+            UnpinWindowCommand = new RelayCommand(() => { /* Logic to Unpin */ });
+            ResetLocationCommand = new RelayCommand(() => { /* Logic to Reset */ });
+            ExitApplicationCommand = new RelayCommand(() => { /* Logic to Exit */ });
+
+            ToggleWindowCommand = new RelayCommand(() =>
+            {
+                // Logic to Show/Hide window when icon is clicked
+                Debug.WriteLine("Tray Icon Clicked!");
+            });
         }
+
+        public ICommand PinWindowCommand { get; }
+        public ICommand UnpinWindowCommand { get; }
+        public ICommand ResetLocationCommand { get; }
+        public ICommand ExitApplicationCommand { get; }
+        public ICommand ToggleWindowCommand { get; }
+
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AddTaskCommand))]
@@ -25,6 +45,11 @@ namespace ToDoBasicList.ViewModels
         public IRelayCommand AddTaskCommand { get; }
 
         private bool IsAddingTask = false;
+
+        public void Pin()
+        {
+
+        }
 
         public void AddTask()
         {
