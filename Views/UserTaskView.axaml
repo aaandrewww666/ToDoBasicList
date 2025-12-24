@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ToDoBasicList.ViewModels"
+             mc:Ignorable="d"
+             x:DataType="vm:UserTaskViewModel"             
+             x:Class="ToDoBasicList.UserTaskView">
+    <Design.DataContext>
+        <vm:UserTaskViewModel/>
+    </Design.DataContext>
+  <Grid>
+	  <Grid.ColumnDefinitions>
+		  <ColumnDefinition Width="20"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      
+      <CheckBox HorizontalAlignment="Left" />
+      
+      <TextBox Grid.Column="1" Text="{Binding TaskDescription}" Classes="TextBoxDefaultStyle" Margin="5,0,5,0" />
+      
+      <Button Grid.Column="2" Classes="ButtonStyle" Command="{Binding RemoveTaskCommand}" Content="x"/>
+  </Grid>
+</UserControl>

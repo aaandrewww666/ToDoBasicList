@@ -3,6 +3,7 @@
         xmlns:vm="using:ToDoBasicList.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="using:ToDoBasicList"
         x:Class="ToDoBasicList.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Title="ToDoBasicList"
@@ -33,7 +34,7 @@
                 
         <TextBox Text="{Binding UserInput}" Classes="TextBoxDefaultStyle"  Margin="0,0,5,0"/>
         
-        <Button Grid.Column="1" Classes="ButtonAddStyle" ToolTip.Tip="{Binding AddButtonTipText}" Command="{Binding AddTaskCommand}"  Content="+"/>
+        <Button Grid.Column="1" Classes="ButtonStyle" ToolTip.Tip="{Binding AddButtonTipText}" Command="{Binding AddTaskCommand}"  Content="+"/>
         
         <TextBlock Text="{Binding TasksLabelText}" Classes="TextBlockDefaultStyle" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0"/>
 
@@ -41,7 +42,7 @@
 			<ItemsControl ItemsSource="{Binding UserTasks}">
 				<ItemsControl.ItemTemplate>
                     <DataTemplate DataType="vm:UserTaskViewModel">
-                            
+                            <views:UserTaskView/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
