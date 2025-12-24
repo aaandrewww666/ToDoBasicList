@@ -3,18 +3,50 @@
         xmlns:vm="using:ToDoBasicList.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ToDoBasicList.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="ToDoBasicList">
+        x:DataType="vm:MainViewModel"
+        Title="ToDoBasicList"
+        Width="200"
+        Height="300"
+        ShowInTaskbar="False"
+        Topmost="True"
+        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        CanResize="False"
+        SystemDecorations="None"
+        >
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainViewModel/>
     </Design.DataContext>
+    <Grid Margin="5" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+                
+        <TextBox Text="{Binding UserInput}" Classes="TextBoxDefaultStyle"  Margin="0,0,5,0"/>
+        
+        <Button Grid.Column="1" Classes="ButtonAddStyle" ToolTip.Tip="{Binding AddButtonTipText}" Command="{Binding AddTaskCommand}"  Content="+"/>
+        
+        <TextBlock Text="{Binding TasksLabelText}" Classes="TextBlockDefaultStyle" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0"/>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0">
+			<ItemsControl ItemsSource="{Binding UserTasks}">
+				<ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="vm:UserTaskViewModel">
+                            
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        
+    </Grid>
 
 </Window>
