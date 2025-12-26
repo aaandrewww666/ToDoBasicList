@@ -21,15 +21,15 @@ namespace ToDoBasicList
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 DisableAvaloniaDataAnnotationValidation();
-                var viewModel = new MainViewModel();
+                var mainWindow = new MainWindow();
 
-                var mainWindow = new MainWindow
-                {
-                    DataContext = viewModel
-                };
+                var windowService = new WindowService(mainWindow);
 
-                var trayService = new TrayIconService();
-                trayService.Initialize(viewModel, mainWindow);
+                var viewModel = new MainViewModel(windowService);
+
+                mainWindow.DataContext = viewModel;
+
+                var trayService = new TrayIconService(viewModel);
 
                 desktop.MainWindow = mainWindow;
             }

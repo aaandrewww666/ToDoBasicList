@@ -1,7 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using System;
 
 namespace ToDoBasicList.Views
 {
@@ -11,8 +9,6 @@ namespace ToDoBasicList.Views
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.Manual;
-            Opened += OnWindowOpened;
-
             PointerPressed += OnPointerPressed;
         }
 
@@ -22,21 +18,6 @@ namespace ToDoBasicList.Views
             {
                 BeginMoveDrag(e);
             }
-        }
-
-        private void OnWindowOpened(object? sender, EventArgs e)
-        {
-            // Get screens from the window's Screens property
-            var screens = Screens;
-            var primaryScreen = screens.Primary;
-
-            if (primaryScreen == null) return;
-
-            var workingArea = primaryScreen.WorkingArea;
-            var left = workingArea.Right - Width;
-            var top = workingArea.Bottom - Height;
-
-            Position = new PixelPoint((int)left, (int)top);
         }
     }
 }

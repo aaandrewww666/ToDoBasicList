@@ -5,21 +5,14 @@ using ToDoBasicList.ViewModels;
 
 namespace ToDoBasicList.Services
 {
-    public interface ITrayIconService
-    {
-        void Initialize(MainViewModel mainViewModel, Window mainWindow);
-    }
-
-    public class TrayIconService : ITrayIconService
+    public class TrayIconService
     {
         private TrayIcon _trayIcon;
-        private MainViewModel _mainViewModel;
-        private Window _mainWindow;
+        private readonly MainViewModel _mainViewModel;
 
-        public void Initialize(MainViewModel mainViewModel, Window mainWindow)
+        public TrayIconService(MainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel;
-            _mainWindow = mainWindow;
+            _mainViewModel = mainViewModel ?? throw new ArgumentNullException(nameof(MainViewModel));
 
             CreateTrayIcon();
         }
@@ -31,24 +24,10 @@ namespace ToDoBasicList.Services
             _trayIcon.Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://ToDoBasicList/Assets/icons8-task-16.png")));
             _trayIcon.ToolTipText = "ToDo's app";
 
-            _trayIcon.Clicked += (s, e) => ToggleWindowStatus(); // left click makes window hide or show
+            _trayIcon.Clicked += (s, e) => _mainViewModel.ToggleWindowCommand.Execute(null); // left click makes window hide or show
 
             CreateContextMenu();
             _trayIcon.IsVisible = true;
-        }
-
-        private void ToggleWindowStatus()
-        {
-            if (_mainWindow.IsVisible)
-            {
-                _mainWindow.Hide();
-            }
-            else
-            {
-                _mainWindow.Show();
-                _mainWindow.WindowState = WindowState.Normal;
-                _mainWindow.Activate();
-            }
         }
 
         private void CreateContextMenu()
@@ -57,14 +36,17 @@ namespace ToDoBasicList.Services
 
             // Pin
             var pinItem = new NativeMenuItem("Pin");
+            pinItem.Click += (s, e) => _mainViewModel.PinWindowCommand.Execute(null);
             contextMenu.Add(pinItem);
 
             // Unpin
             var unpinItem = new NativeMenuItem("Unpin");
+            unpinItem.Click += (s, e) => _mainViewModel.UnpinWindowCommand.Execute(null);
             contextMenu.Add(unpinItem);
 
             // Reset
             var resetLocationItem = new NativeMenuItem("Reset window location to default");
+            resetLocationItem.Click += (s, e) => _mainViewModel.SetWindowBasePositionCommand.Execute(null);
             contextMenu.Add(resetLocationItem);
 
             contextMenu.Add(new NativeMenuItemSeparator());
@@ -73,7 +55,7 @@ namespace ToDoBasicList.Services
             var exitItem = new NativeMenuItem("Close application");
             exitItem.Click += (s, e) =>
             {
-                _mainWindow.Close();
+                _mainViewModel.ExitApplicationCommand.Execute(null);
             };
             contextMenu.Add(exitItem);
 

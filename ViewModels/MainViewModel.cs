@@ -1,40 +1,39 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows.Input;
+using ToDoBasicList.Services.Contracts;
 
 namespace ToDoBasicList.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
+        private readonly IWindowService _windowService;
         public ObservableCollection<UserTaskViewModel> UserTasks { get; } = [];
 
-        public MainViewModel()
+        public MainViewModel(IWindowService windowService)
         {
+            _windowService = windowService ?? throw new ArgumentNullException(nameof(IWindowService));
             AddTaskCommand = new RelayCommand(
                 execute: AddTask,
                 canExecute: CanAddTask
                 );
-
-            PinWindowCommand = new RelayCommand(Pin);
-            UnpinWindowCommand = new RelayCommand(() => { /* Logic to Unpin */ });
-            ResetLocationCommand = new RelayCommand(() => { /* Logic to Reset */ });
-            ExitApplicationCommand = new RelayCommand(() => { /* Logic to Exit */ });
-
-            ToggleWindowCommand = new RelayCommand(() =>
-            {
-                // Logic to Show/Hide window when icon is clicked
-                Debug.WriteLine("Tray Icon Clicked!");
-            });
         }
 
-        public ICommand PinWindowCommand { get; }
-        public ICommand UnpinWindowCommand { get; }
-        public ICommand ResetLocationCommand { get; }
-        public ICommand ExitApplicationCommand { get; }
-        public ICommand ToggleWindowCommand { get; }
+        [RelayCommand]
+        private void PinWindow() => _windowService.Pin();
 
+        [RelayCommand]
+        private void UnpinWindow() => _windowService.Unpin();
+
+        [RelayCommand]
+        private void SetWindowBasePosition() => _windowService.SetWindowBasePosition();
+
+        [RelayCommand]
+        private void ToggleWindow() => _windowService.Toggle();
+
+        [RelayCommand]
+        private void ExitApplication() => _windowService.Close();
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AddTaskCommand))]
