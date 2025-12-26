@@ -18,6 +18,8 @@ namespace ToDoBasicList.ViewModels
                 execute: AddTask,
                 canExecute: CanAddTask
                 );
+
+            SetWindowBasePosition();
         }
 
         [RelayCommand]
