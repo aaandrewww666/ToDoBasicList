@@ -1,0 +1,54 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+             x:Class="ToDoBasicList.Views.Controls.ExpandingTextBox"
+             x:Name="Root">
+
+    <Border Background="{DynamicResource BackgroundBrush}"
+            CornerRadius="1"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="1.5"
+            ClipToBounds="True">
+        <Grid>
+            <ScrollViewer x:Name="PART_ScrollViewer"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+
+                <TextBox x:Name="PART_TextBox"
+                         Text="{Binding Message, ElementName=Root, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         TextChanged="OnTextChanged"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Padding="5,5,27,5"
+                         Background="Transparent"
+                         Foreground="{DynamicResource ForegroundBrush}"
+                         CaretBrush="{DynamicResource AccentBrush}"
+                         SelectionBrush="{DynamicResource AccentBrushAlpha}"
+                         FontFamily="Segoe UI"
+                         Watermark="{Binding Placeholder, ElementName=Root}"
+                         MinHeight="30"
+                         MaxHeight="{Binding MaxHeight, ElementName=Root}"
+                         VerticalAlignment="Top"
+                         VerticalContentAlignment="Top" />
+            </ScrollViewer>
+
+			<Button Content="✕"
+                Click="OnClearClick"
+                Classes="icon"
+                Margin="0,0,2,0"
+                IsVisible="{Binding Text, ElementName=PART_TextBox, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+            
+            <Button.Styles>
+                <Style Selector="Button:pointerover">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+                </Style>
+            </Button.Styles>
+        </Button>
+        </Grid>
+        
+    </Border>
+</UserControl>

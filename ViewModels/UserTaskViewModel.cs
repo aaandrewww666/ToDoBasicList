@@ -4,7 +4,7 @@ using System;
 
 namespace ToDoBasicList.ViewModels
 {
-    public partial class UserTaskViewModel : ViewModelBase
+    public sealed partial class UserTaskViewModel : ViewModelBase
     {
         public UserTaskViewModel(string taskDescription, Action<UserTaskViewModel> DeleteUserTaskAction)
         {

@@ -6,7 +6,7 @@ using ToDoBasicList.Services.Contracts;
 
 namespace ToDoBasicList.Services
 {
-    public class WindowService : IWindowService
+    public sealed class WindowService : IWindowService
     {
         private readonly Window _window;
 

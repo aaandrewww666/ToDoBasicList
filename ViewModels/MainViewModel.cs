@@ -6,10 +6,18 @@ using ToDoBasicList.Services.Contracts;
 
 namespace ToDoBasicList.ViewModels
 {
-    public partial class MainViewModel : ViewModelBase
+    public sealed partial class MainViewModel : ViewModelBase
     {
         private readonly IWindowService _windowService;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AddTaskCommand))]
+        private string userInput = string.Empty;
+
         public ObservableCollection<UserTaskViewModel> UserTasks { get; } = [];
+        public string AddButtonTipText { get; } = "Click the button to add new task";
+        public string TasksLabelText { get; } = "Tasks:";
+
 
         public MainViewModel(IWindowService windowService)
         {
@@ -37,20 +45,11 @@ namespace ToDoBasicList.ViewModels
         [RelayCommand]
         private void ExitApplication() => _windowService.Close();
 
-        [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(AddTaskCommand))]
-        private string userInput = string.Empty;
-
         private bool CanAddTask() => !string.IsNullOrWhiteSpace(UserInput) && !IsAddingTask;
 
         public IRelayCommand AddTaskCommand { get; }
 
         private bool IsAddingTask = false;
-
-        public void Pin()
-        {
-
-        }
 
         public void AddTask()
         {
@@ -72,8 +71,5 @@ namespace ToDoBasicList.ViewModels
         {
             UserTasks.Remove(userTaskVMToDelete);
         }
-
-        public string AddButtonTipText { get; } = "Click the button to add new task";
-        public string TasksLabelText { get; } = "Tasks:";
     }
 }

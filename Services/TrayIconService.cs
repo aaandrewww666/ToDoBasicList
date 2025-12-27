@@ -5,7 +5,7 @@ using ToDoBasicList.ViewModels;
 
 namespace ToDoBasicList.Services
 {
-    public class TrayIconService
+    public sealed class TrayIconService
     {
         private TrayIcon _trayIcon;
         private readonly MainViewModel _mainViewModel;

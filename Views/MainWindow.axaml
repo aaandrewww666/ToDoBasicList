@@ -1,4 +1,5 @@
 <Window xmlns="https://github.com/avaloniaui"
+        xmlns:controls="using:ToDoBasicList.Views.Controls"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:ToDoBasicList.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,46 +9,53 @@
         x:DataType="vm:MainViewModel"
         Title="ToDoBasicList"
         Width="200"
+        MinWidth="200"
+        MaxWidth="400"
         Height="300"
+        MinHeight="300"
+        MaxHeight="600"
         ShowInTaskbar="False"
-        Topmost="True"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
-        CanResize="False"
+        Topmost="True"
+        CanResize="True"
         SystemDecorations="None"
         >
 
     <Design.DataContext>
         <vm:MainViewModel/>
     </Design.DataContext>
-    <Grid Margin="5" VerticalAlignment="Stretch">
-        <Grid.RowDefinitions>
-			<RowDefinition Height="30"/>
-			<RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+		<Grid x:Name="RootGrid"
+              >
+            <Grid VerticalAlignment="Stretch" Margin="6">
+                <Grid.RowDefinitions>
+			        <RowDefinition Height="Auto"/>
+			        <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+			        <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 
-        <TextBox Text="{Binding UserInput}" Classes="TextBoxDefaultStyle"  Margin="0,0,5,0"/>
+                <StackPanel Grid.Column="0" Margin="0,0,5,0" Grid.Row="0" >
+                    <controls:ExpandingTextBox Message="{Binding UserInput, Mode=TwoWay}"/>			
+                </StackPanel>
         
-        <Button Grid.Column="1" Classes="ButtonStyle" ToolTip.Tip="{Binding AddButtonTipText}" Command="{Binding AddTaskCommand}"  Content="+"/>
+                <Button Grid.Column="1" Classes="ButtonStyle" ToolTip.Tip="{Binding AddButtonTipText}" Command="{Binding AddTaskCommand}"  Content="+"/>
         
-        <TextBlock Text="{Binding TasksLabelText}" Classes="TextBlockDefaultStyle" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0"/>
+                <TextBlock Text="{Binding TasksLabelText}" Classes="TextBlockDefaultStyle" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0"/>
 
-        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0">
-			<ItemsControl ItemsSource="{Binding UserTasks}">
-				<ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="vm:UserTaskViewModel">
-                            <views:UserTaskView/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        
-    </Grid>
-
+                <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0">
+			        <ItemsControl ItemsSource="{Binding UserTasks}">
+				        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="vm:UserTaskViewModel">
+                                    <views:UserTaskView/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
 </Window>
