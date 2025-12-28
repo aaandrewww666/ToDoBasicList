@@ -5,9 +5,9 @@ using ToDoBasicList.ViewModels;
 
 namespace ToDoBasicList.Services
 {
-    public sealed class TrayIconService
+    public sealed class TrayIconService : IDisposable
     {
-        private TrayIcon _trayIcon;
+        private TrayIcon? _trayIcon;
         private readonly MainViewModel _mainViewModel;
 
         public TrayIconService(MainViewModel mainViewModel)
@@ -59,8 +59,17 @@ namespace ToDoBasicList.Services
             };
             contextMenu.Add(exitItem);
 
-            _trayIcon.Menu = contextMenu;
+            if (_trayIcon != null)
+                _trayIcon.Menu = contextMenu;
         }
 
+        public void Dispose()
+        {
+            if (_trayIcon != null)
+            {
+                _trayIcon.Dispose();
+                _trayIcon = null;
+            }
+        }
     }
 }

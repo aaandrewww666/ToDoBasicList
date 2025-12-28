@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using System;
 using System.Linq;
 using ToDoBasicList.Services;
 using ToDoBasicList.ViewModels;
@@ -32,6 +33,8 @@ namespace ToDoBasicList
                 var trayService = new TrayIconService(viewModel);
 
                 desktop.MainWindow = mainWindow;
+
+                AppDomain.CurrentDomain.ProcessExit += (_, _) => trayService.Dispose();
             }
 
             base.OnFrameworkInitializationCompleted();
