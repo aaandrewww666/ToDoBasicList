@@ -6,6 +6,9 @@ using ToDoBasicList.Services.Contracts;
 
 namespace ToDoBasicList.ViewModels
 {
+    /// <summary>
+    /// Main ViewModel for managing MainWindow and another application logic
+    /// </summary>
     public sealed partial class MainViewModel : ViewModelBase
     {
         private readonly IWindowService _windowService;
@@ -45,12 +48,19 @@ namespace ToDoBasicList.ViewModels
         [RelayCommand]
         private void ExitApplication() => _windowService.Close();
 
+
         private bool CanAddTask() => !string.IsNullOrWhiteSpace(UserInput) && !IsAddingTask;
 
+        /// <summary>
+        /// RelayCommand for adding task to ObservableCollection
+        /// </summary>
         public IRelayCommand AddTaskCommand { get; }
 
         private bool IsAddingTask = false;
 
+        /// <summary>
+        /// A method that adds a task to an ObservableCollection
+        /// </summary>
         public void AddTask()
         {
             IsAddingTask = true;
@@ -67,6 +77,9 @@ namespace ToDoBasicList.ViewModels
             }
         }
 
+        /// <summary>
+        /// A method that removes a task from an ObservableCollection
+        /// </summary>
         private void DeleteTask(UserTaskViewModel userTaskVMToDelete)
         {
             UserTasks.Remove(userTaskVMToDelete);

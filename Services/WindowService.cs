@@ -6,6 +6,9 @@ using ToDoBasicList.Services.Contracts;
 
 namespace ToDoBasicList.Services
 {
+    /// <summary>
+    /// Service to manage Window properties
+    /// </summary>
     public sealed class WindowService : IWindowService
     {
         private readonly Window _window;
@@ -40,7 +43,10 @@ namespace ToDoBasicList.Services
                 Show();
         }
 
-        public void SetWindowBasePosition() //Base = right left 
+        /// <summary>
+        /// Base window position is the bottom right corner
+        /// </summary>
+        public void SetWindowBasePosition()
         {
             var screens = _window.Screens;
             var primaryScreen = screens.Primary;

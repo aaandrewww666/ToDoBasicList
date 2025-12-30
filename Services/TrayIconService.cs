@@ -5,6 +5,10 @@ using ToDoBasicList.ViewModels;
 
 namespace ToDoBasicList.Services
 {
+    /// <summary>
+    /// Service for managing the tray icon of application in the Windows tray
+    /// After use, it should be cleared
+    /// </summary>
     public sealed class TrayIconService : IDisposable
     {
         private TrayIcon? _trayIcon;
