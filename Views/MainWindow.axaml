@@ -51,7 +51,7 @@
 			        <ItemsControl ItemsSource="{Binding UserTasks}">
 				        <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="vm:UserTaskViewModel">
-                                    <views:UserTaskView/>
+                                    <views:UserTaskView Margin="0,5,0,0"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
