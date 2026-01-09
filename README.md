@@ -1,11 +1,20 @@
-# ToDoBasicList
+# Description
+This is a regular ToDoList project written in C# using Avalonia and the MVVM Toolkit. 
+I prefer to use it because it's small (and I often need to write notes in txt/telegram/other places), so it's great to have this compact app on my second monitor where I can set statuses and write notes. I don't need a huge cross-platform project. 
+
+Later, I plan to add Windows scissors functionality and the ability to save tasks to a JSON file so that they won't be lost when I restart my computer or close the app.
+Maybe OCR.
+
+# Usage
 After launching the app, the main window will be located in the bottom right corner (default location).
 
 <img width="355" height="396" alt="image" src="https://github.com/user-attachments/assets/42948dc0-e7de-460c-b3ca-62ca785b2254" />
 
+
 The main control of the application's functionality is performed using the icon service.
 
 <img width="161" height="69" alt="image" src="https://github.com/user-attachments/assets/7402ba87-4335-46ec-bee3-b7db61f78dd0" />
+
 
 To show/hide a window, click on the icon with the left mouse button, and to open the context menu, click with the right mouse button.
 
