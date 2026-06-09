@@ -27,7 +27,7 @@
                          CaretBrush="{DynamicResource AccentBrush}"
                          SelectionBrush="{DynamicResource AccentBrushAlpha}"
                          FontFamily="Segoe UI"
-                         Watermark="{Binding Placeholder, ElementName=Root}"
+                         PlaceholderText="{Binding Placeholder, ElementName=Root}"
                          MinHeight="30"
                          MaxHeight="{Binding MaxHeight, ElementName=Root}"
                          VerticalAlignment="Top"
