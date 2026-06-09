@@ -10,21 +10,33 @@ namespace ToDoBasicList.ViewModels
     public sealed partial class UserTaskViewModel : ViewModelBase
     {
         /// <summary>
-        /// Default constructor
+        /// Some text (user task)
         /// </summary>
-        /// <param name="taskDescription"> Some text to make task </param>
-        /// <param name="DeleteUserTaskAction"> Delegate for logic of deleting <see cref="UserTaskViewModel"/> from another place </param>
-        public UserTaskViewModel(string taskDescription, Action<UserTaskViewModel> DeleteUserTaskAction)
-        {
-            this.taskDescription = taskDescription;
-            _deleteUserTaskAction = DeleteUserTaskAction;
-        }
+        [ObservableProperty]
+        public partial string TaskDescription { get; set; }
+
+        /// <summary>
+        /// Whether the task is marked as done
+        /// </summary>
+        [ObservableProperty]
+        public partial bool IsCompleted { get; set; }
 
         /// <summary>
         /// Delegate for logic of deleting <see cref="UserTaskViewModel"/> from another place
         /// </summary>
-        private Action<UserTaskViewModel> _deleteUserTaskAction;
+        private readonly Action<UserTaskViewModel> _deleteUserTaskAction;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="taskDescription"> Some text to make task </param>
+        /// <param name="deleteUserTaskAction"> Delegate for logic of deleting <see cref="UserTaskViewModel"/> from another place </param>
+        public UserTaskViewModel(string taskDescription, Action<UserTaskViewModel> deleteUserTaskAction)
+        {
+            TaskDescription = taskDescription;
+            _deleteUserTaskAction = deleteUserTaskAction;
+        }
+        
         /// <summary>
         /// RelayCommand for invoking delegate
         /// </summary>
@@ -33,11 +45,5 @@ namespace ToDoBasicList.ViewModels
         {
             _deleteUserTaskAction?.Invoke(this);
         }
-
-        /// <summary>
-        /// Some text (user task)
-        /// </summary>
-        [ObservableProperty]
-        private string taskDescription;
     }
 }

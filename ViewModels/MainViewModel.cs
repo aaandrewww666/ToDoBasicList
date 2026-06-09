@@ -15,12 +15,11 @@ namespace ToDoBasicList.ViewModels
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AddTaskCommand))]
-        private string userInput = string.Empty;
+        public partial string UserInput { get; set; } = string.Empty;
 
         public ObservableCollection<UserTaskViewModel> UserTasks { get; } = [];
         public string AddButtonTipText { get; } = "Click the button to add new task";
         public string TasksLabelText { get; } = "Tasks:";
-
 
         public MainViewModel(IWindowService windowService)
         {

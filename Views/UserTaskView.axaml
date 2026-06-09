@@ -16,9 +16,15 @@
           <ColumnDefinition Width="Auto"/>
       </Grid.ColumnDefinitions>
       
-      <CheckBox HorizontalAlignment="Left" />
+      <CheckBox HorizontalAlignment="Left" IsChecked="{Binding IsCompleted}" />
       
-      <TextBox Grid.Column="1" Text="{Binding TaskDescription}"  Classes="TextBoxDefaultStyle" Margin="5,0,5,0" />
+      <Panel Grid.Column="1" Margin="5,0,5,0">
+          <TextBox Text="{Binding TaskDescription}" Classes="TextBoxDefaultStyle"
+                   IsVisible="{Binding !IsCompleted}" />
+          <TextBlock Text="{Binding TaskDescription}" IsVisible="{Binding IsCompleted}"
+                     TextDecorations="Strikethrough" Opacity="0.5"
+                     TextWrapping="Wrap" VerticalAlignment="Center" />
+      </Panel>
       
       <Button Grid.Column="2" Classes="ButtonStyle" Command="{Binding RemoveTaskCommand}" Content="x"/>
   </Grid>
