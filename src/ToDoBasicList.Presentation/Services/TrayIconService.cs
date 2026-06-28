@@ -1,22 +1,22 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Platform;
 using System;
-using ToDoBasicList.ViewModels;
+using ToDoBasicList.Presentation.ViewModels;
 
-namespace ToDoBasicList.Services
+namespace ToDoBasicList.Presentation.Services
 {
     /// <summary>
-    /// Service for managing the tray icon of application in the Windows tray
+    /// Service for managing the tray icon of application in the Windows tray 
     /// After use, it should be cleared
     /// </summary>
-    public sealed class TrayIconService : IDisposable
+    public sealed class TrayIconService : IDisposable // TODO: check on Linux tray (TrayIcon supports crossplatform)
     {
         private TrayIcon? _trayIcon;
         private readonly MainViewModel _mainViewModel;
 
         public TrayIconService(MainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel ?? throw new ArgumentNullException(nameof(MainViewModel));
+            _mainViewModel = mainViewModel ?? throw new ArgumentNullException(nameof(mainViewModel));
 
             CreateTrayIcon();
         }
@@ -25,7 +25,7 @@ namespace ToDoBasicList.Services
         {
             _trayIcon = new TrayIcon();
 
-            _trayIcon.Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://ToDoBasicList/Assets/icons8-task-16.png")));
+            _trayIcon.Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://ToDoBasicList.Presentation/Assets/icons8-task-16.png")));
             _trayIcon.ToolTipText = "ToDo's app";
 
             _trayIcon.Clicked += (s, e) => _mainViewModel.ToggleWindowCommand.Execute(null); // left click makes window hide or show

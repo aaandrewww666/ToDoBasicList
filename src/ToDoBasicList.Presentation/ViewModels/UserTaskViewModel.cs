@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 
-namespace ToDoBasicList.ViewModels
+namespace ToDoBasicList.Presentation.ViewModels
 {
     /// <summary>
     /// ViewModel for text-view based on user input
@@ -31,10 +31,12 @@ namespace ToDoBasicList.ViewModels
         /// </summary>
         /// <param name="taskDescription"> Some text to make task </param>
         /// <param name="deleteUserTaskAction"> Delegate for logic of deleting <see cref="UserTaskViewModel"/> from another place </param>
-        public UserTaskViewModel(string taskDescription, Action<UserTaskViewModel> deleteUserTaskAction)
+        /// <param name="isCompleted"> Initial completion status (used when restoring saved tasks) </param>
+        public UserTaskViewModel(string taskDescription, Action<UserTaskViewModel> deleteUserTaskAction, bool isCompleted = false)
         {
             TaskDescription = taskDescription;
             _deleteUserTaskAction = deleteUserTaskAction;
+            IsCompleted = isCompleted;
         }
         
         /// <summary>

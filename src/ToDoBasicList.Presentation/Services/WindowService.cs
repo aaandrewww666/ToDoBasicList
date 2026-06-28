@@ -2,9 +2,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using System;
-using ToDoBasicList.Services.Contracts;
+using ToDoBasicList.Presentation.Services.Contracts;
 
-namespace ToDoBasicList.Services
+namespace ToDoBasicList.Presentation.Services
 {
     /// <summary>
     /// Service to manage Window properties

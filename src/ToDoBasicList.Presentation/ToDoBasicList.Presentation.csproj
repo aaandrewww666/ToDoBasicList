@@ -11,8 +11,12 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoBasicList.Core\ToDoBasicList.Core.csproj" />
+    <ProjectReference Include="..\ToDoBasicList.Infrastructure\ToDoBasicList.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

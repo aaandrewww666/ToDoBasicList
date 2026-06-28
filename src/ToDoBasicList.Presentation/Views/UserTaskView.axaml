@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:ToDoBasicList.ViewModels"
+             xmlns:vm="using:ToDoBasicList.Presentation.ViewModels"
              mc:Ignorable="d"
              x:DataType="vm:UserTaskViewModel"             
-             x:Class="ToDoBasicList.UserTaskView">
+             x:Class="ToDoBasicList.Presentation.UserTaskView">
     <Design.DataContext>
         <vm:UserTaskViewModel/>
     </Design.DataContext>

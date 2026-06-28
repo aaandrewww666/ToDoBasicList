@@ -2,11 +2,12 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using System;
-using ToDoBasicList.Services;
-using ToDoBasicList.ViewModels;
-using ToDoBasicList.Views;
+using ToDoBasicList.Infrastructure;
+using ToDoBasicList.Presentation.Services;
+using ToDoBasicList.Presentation.ViewModels;
+using ToDoBasicList.Presentation.Views;
 
-namespace ToDoBasicList
+namespace ToDoBasicList.Presentation
 {
     public partial class App : Application
     {
@@ -22,8 +23,9 @@ namespace ToDoBasicList
                 var mainWindow = new MainWindow();
 
                 var windowService = new WindowService(mainWindow);
+                var taskStorage = new JsonTaskStorageService();
 
-                var viewModel = new MainViewModel(windowService);
+                var viewModel = new MainViewModel(windowService, taskStorage);
 
                 mainWindow.DataContext = viewModel;
 

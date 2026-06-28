@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace ToDoBasicList
+namespace ToDoBasicList.Presentation
 {
     internal sealed class Program
     {

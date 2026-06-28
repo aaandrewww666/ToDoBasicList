@@ -7,7 +7,7 @@ using Avalonia.Styling;
 using Avalonia.Threading;
 using System;
 
-namespace ToDoBasicList.Views.Controls;
+namespace ToDoBasicList.Presentation.Views.Controls;
 
 public partial class ExpandingTextBox : UserControl
 {

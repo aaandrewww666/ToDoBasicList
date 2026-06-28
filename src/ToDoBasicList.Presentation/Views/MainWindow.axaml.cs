@@ -5,7 +5,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
 
-namespace ToDoBasicList.Views
+namespace ToDoBasicList.Presentation.Views
 {
     public partial class MainWindow : Window
     {

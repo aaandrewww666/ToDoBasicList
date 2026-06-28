@@ -1,4 +1,4 @@
-﻿namespace ToDoBasicList.Services.Contracts
+﻿namespace ToDoBasicList.Presentation.Services.Contracts
 {
     public interface IWindowService
     {
