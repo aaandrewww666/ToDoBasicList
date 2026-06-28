@@ -56,8 +56,6 @@ namespace ToDoBasicList.Presentation.ViewModels
 
             UserTasks.CollectionChanged += OnTasksCollectionChanged;
             LoadTasksAsync().SafeFireAndForget();
-
-            SetWindowBasePosition();
         }
 
         [RelayCommand]

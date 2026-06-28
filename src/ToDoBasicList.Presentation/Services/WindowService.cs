@@ -16,6 +16,15 @@ namespace ToDoBasicList.Presentation.Services
         public WindowService(Window window)
         {
             _window = window ?? throw new ArgumentNullException(nameof(window));
+
+            // Position only sticks once the window is actually shown
+            _window.Opened += OnWindowOpened;
+        }
+
+        private void OnWindowOpened(object? sender, EventArgs e)
+        {
+            _window.Opened -= OnWindowOpened;
+            SetWindowBasePosition();
         }
 
         public void Show()
@@ -48,16 +57,19 @@ namespace ToDoBasicList.Presentation.Services
         /// </summary>
         public void SetWindowBasePosition()
         {
-            var screens = _window.Screens;
-            var primaryScreen = screens.Primary;
+            var primaryScreen = _window.Screens.Primary;
 
             if (primaryScreen == null) return;
 
             var workingArea = primaryScreen.WorkingArea;
-            var left = workingArea.Right - _window.Width;
-            var top = workingArea.Bottom - _window.Height;
+            var scaling = primaryScreen.Scaling;
 
-            _window.Position = new PixelPoint((int)left, (int)top);
+            var size = _window.FrameSize ?? new Size(_window.Width, _window.Height);
+
+            var left = workingArea.Right - (int)(size.Width * scaling);
+            var top = workingArea.Bottom - (int)(size.Height * scaling);
+
+            _window.Position = new PixelPoint(left, top);
         }
 
         public void Pin()
